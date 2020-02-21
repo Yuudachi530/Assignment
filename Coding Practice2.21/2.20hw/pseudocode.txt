@@ -1,0 +1,77 @@
+//s16-23-Q3
+FUNCTION Decrypt(CipherChar : CHAR, Lookup : ARRARY)
+    DECLARE Found : BOOLEAN
+    DECLARE Index : INTEGER
+    DECLARE OriginalChar : CHAR
+    index ← 1
+    Found ← FLASE
+    WHILE Found = FLASE
+        IF Lookup[index] = CipherChar
+            THEN
+                Found ← True
+            ELSE 
+                Index ← Index + 1
+        ENDIF
+    ENDWHILE
+OriginalChar ← CHR(Index)
+RETURN OriginalChar
+ENDFUNCTION
+
+
+
+//w17-21-Q3a
+DECLARE UserNameArray: ARRAY[1:100] OF STRING
+DECLARE UserID: STRING // String of numerals
+DECLARE Temp: STRING 
+DECLARE NextID: STRING
+PROCEDURE BubbleSort()
+    FOR i ← 1 to 99
+        UserID ← LEFT(UserNameArray[i], 6)
+        NextID ← LEFT(UserNameArray[i + 1], 6)
+        IF UserID > NextID
+            THEN
+                Temp ← UserNameArray[i + 1]
+                UserNameArray[i + 1] ← UserNameArray[i]
+                UserNameArray[i] ← Temp
+        ENDIF
+    ENDFOR
+ENDPROCEDURE
+
+
+//w17-21-Q3b
+PROCEDURE FindRepeats()
+    DECLARE i, RepeatCount : INTEGER
+    DECLARE FirstID, SecondID : STRING
+    RepeatCount ← 0
+
+    FOR i ← 2 to 100
+        FirstID ← LEFT(UserNameArray[i - 1], 6)
+        SecondID ← LEFT(UserNameArray[i], 6)
+        IF FirstID = SecondID
+            THEN
+                OUTPUT UserNameArray[i]
+        ENDIF
+    ENDFOR
+
+    IF RepeatCount = 0
+        THEN
+            OUTPUT "the array contains no repeated UserIDs"
+        ELSE
+            OUTPUT "there are " & RepeatCount & " repeated UserIDs"
+    ENDIF
+ENDPROCEDURE
+
+
+//s19-21-Q3
+TotalValue ← 0
+ZeroCount ← 0
+FOR Index ← 1 to 100
+    TotalValue ← TotalValue + Result[Index]
+    IF result[Index] = 0.0
+        THEN 
+            ZeroCount ← ZeroCount + 1
+    ENDIF
+ENDFOR
+
+OUTPUT "the average is ", (TotalValue / 100)
+OUTPUT "The number of elements with a zero value is ", ZeroCount
